@@ -22,7 +22,7 @@ generator_flag = []
 cc_flag = []
 # cc_flag.append("--gpu-architecture=native")
 cc_flag.append("-gencode")
-cc_flag.append("arch=compute_120a,code=sm_120a")
+cc_flag.append("arch=compute_120,code=sm_120")
 
 def get_cuda_bare_metal_version(cuda_dir):
     raw_output = subprocess.check_output([cuda_dir + "/bin/nvcc", "-V"], universal_newlines=True)
@@ -45,7 +45,8 @@ def get_device_arch():
     raise NotImplementedError("Not supported gpu!")
     
 this_dir = Path(__file__).parent
-device_arch = get_device_arch()
+# device_arch = get_device_arch()
+device_arch = "blackwell"
 should_compile_fp8_fast_acc = device_arch in ["ada", "blackwell"]
 if should_compile_fp8_fast_acc:
     subprocess.run(["git", "submodule", "update", "--init", "third_party/cutlass"], check=True)
