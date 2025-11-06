@@ -20,7 +20,9 @@ system_name = platform.system()
 ext_modules = []
 generator_flag = []
 cc_flag = []
-cc_flag.append("--gpu-architecture=native")
+# cc_flag.append("--gpu-architecture=native")
+cc_flag.append("-gencode")
+cc_flag.append("arch=compute_120a,code=sm_120a")
 
 def get_cuda_bare_metal_version(cuda_dir):
     raw_output = subprocess.check_output([cuda_dir + "/bin/nvcc", "-V"], universal_newlines=True)
